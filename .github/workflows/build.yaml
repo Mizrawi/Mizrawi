@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Get Python 3.8
         uses: actions/setup-python@v2
         with:
@@ -34,7 +34,9 @@ jobs:
         run: |-
           git config --global user.email "github-actions-bot@mizrawi.github.io"
           git config --global user.name "Mizrawi/GitHub-Actions-Bot"
+          git stash
           git pull --rebase
+          git stash pop
           git add .
           git commit -m "Updated README" -a || echo "No changes to commit"
           git push
