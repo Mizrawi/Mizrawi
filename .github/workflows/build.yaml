@@ -32,10 +32,9 @@ jobs:
         run: python today.py
       - name: Commit
         run: |-
-          git add .
-          git diff
           git config --global user.email "github-actions-bot@mizrawi.github.io"
           git config --global user.name "Mizrawi/GitHub-Actions-Bot"
-          git commit -m "Updated README" -a || echo "No changes to commit"
           git pull --rebase
+          git add .
+          git commit -m "Updated README" -a || echo "No changes to commit"
           git push
