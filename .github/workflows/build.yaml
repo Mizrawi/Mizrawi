@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - name: Get Python 3.8
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
         with:
           python-version: '3.8'
       - name: Configure pip cache
@@ -37,4 +37,5 @@ jobs:
           git config --global user.email "github-actions-bot@mizrawi.github.io"
           git config --global user.name "Mizrawi/GitHub-Actions-Bot"
           git commit -m "Updated README" -a || echo "No changes to commit"
+          git pull --rebase
           git push
