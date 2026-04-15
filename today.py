@@ -322,7 +322,13 @@ def svg_overwrite(filename, age_data, commit_data, star_data, repo_data, contrib
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'age_data', age_data)
+    age_str = str(age_data)
+    age_dots = ' ' + '.' * (49 - len(age_str)) + ' '
+    age_el = root.find(".//*[@id='age_data_dots']")
+    if age_el is not None:
+        age_el.text = age_dots
+        age_el.set('{http://www.w3.org/XML/1998/namespace}space', 'preserve')
+    find_and_replace(root, 'age_data', age_str)
     justify_format(root, 'commit_data', commit_data, 22)
     justify_format(root, 'star_data', star_data, 14)
     justify_format(root, 'repo_data', repo_data, 6)
